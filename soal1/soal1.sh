@@ -34,6 +34,9 @@ tried=$(cat syslog.log | grep -c "Tried to add information to closed ticket")
 user=$(grep -oP "(?<=\().*(?=\))" syslog.log | sort | uniq)
 #bisa juga ditambahkan uniq-c untuk melihat toal kemunculannya
 #grep -oP "(?<=\().*(?=\))" syslog.log | sort | uniq -c
+#untuk mencari jumlah kemunculan lognya lebih lengkap pada poin e
+#userinfo=$(grep -E "INFO.*($username))" syslog.log | wc -l)
+#usererror=$(grep -E "ERROR.*($username))" syslog.log | wc -l)
 
 #1d
 printf "ERROR,COUNT\n" >> error_message.csv
