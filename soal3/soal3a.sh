@@ -6,7 +6,7 @@ do
         if ((h<=9))
         then
 		wget -O Koleksi_0$h.jpg -a foto.log https://loremflickr.com/320/240/kitten
-                for((i=1; i<q; i=i+1))
+                for((i=1; i<h; i=i+1))
                 do
 			if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_0$h.jpg"; then
                                 rm "./Koleksi_0$h.jpg"
