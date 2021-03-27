@@ -1,8 +1,8 @@
 
 #!/bin/bash
 
-now=$(date -d yesterday +"%d-%m-%Y")
-ytd=$(date +"%d-%m-%Y")
+ytd=$(date -d yesterday +"%d-%m-%Y")
+now=$(date +"%d-%m-%Y")
 cek=$(ls Kucing_$ytd)
 ck=$?
 
