@@ -1,13 +1,11 @@
 #!/bin/bash
 
 #1a
-
 cat syslog.log | grep 'ERROR\|INFO' | cut -d ' ' -f 6-30 | sort
 #atau
 #cat syslog.log | cut -d ' ' -f 6-30 | sort 
 
 #1b
-
 #menggunakan cara manual, namun untuk mengecek  total error tiap pesan bisa dilihat dengan cara berikut:
 #cat syslog.log | grep "ERROR" | cut -d ' ' -f 7-9 | sort | uniq -c | sort -nr
 
