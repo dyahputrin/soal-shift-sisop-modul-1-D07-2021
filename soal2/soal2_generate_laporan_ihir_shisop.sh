@@ -25,7 +25,7 @@ BEGIN{FS=OFS="\t"; printf("Daftar nama customer di Albuquerque pada tahun 2017 a
 
 # soal 2c
 awk '
-BEGIN { countC=0;countHO=0;countCP=0;min=0; Segmen="Customer"; FS=OFS="\t"}
+BEGIN { countC=0;countHO=0;countCP=0;min=0; Segmen="Consumer"; FS=OFS="\t"}
 {
  {
   if($8=="Consumer") countC++;
