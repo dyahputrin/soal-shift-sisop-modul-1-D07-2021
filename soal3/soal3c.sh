@@ -12,7 +12,7 @@ then
 	mkdir "Kelinci_$now"
 	h=1
 
-	for((j=1;j<=24; j=j+1))
+	for((j=1;j<=23; j=j+1))
 	do
 		if ((h<=9))
 		then
@@ -21,7 +21,8 @@ then
 		        do
 				if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_0$h.jpg"; then
 		                        rm "./Koleksi_0$h.jpg"
-					h=$((h-1))     
+					h=$((h-1))
+					j=$((j-1))
 					break
 		                fi
 		        done
@@ -34,12 +35,14 @@ then
 					if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_$h.jpg"; then
 						rm "./Koleksi_$h.jpg"
 						h=$((h-1))
+						j=$((j-1))
 						break
 		                        fi
 		                else
 					if cmp -s "./Koleksi_$i.jpg" "./Koleksi_$h.jpg"; then
 						rm "./Koleksi_$h.jpg"
 						h=$((h-1))
+						j=$((j-1))
 						break
 		                        fi
 		                fi
@@ -53,7 +56,7 @@ else
 	mkdir "Kucing_$now"
 	h=1
 
-	for((j=1;j<=24; j=j+1))
+	for((j=1;j<=23; j=j+1))
 	do
 		if ((h<=9))
 		then
@@ -62,7 +65,8 @@ else
 		        do
 				if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_0$h.jpg"; then
 		                        rm "./Koleksi_0$h.jpg"
-					h=$((h-1))     
+					h=$((h-1))
+					j=$((j-1))
 					break
 		                fi
 		        done
@@ -75,12 +79,14 @@ else
 					if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_$h.jpg"; then
 						rm "./Koleksi_$h.jpg"
 						h=$((h-1))
+						j=$((j-1))
 						break
 		                        fi
 		                else
 					if cmp -s "./Koleksi_$i.jpg" "./Koleksi_$h.jpg"; then
 						rm "./Koleksi_$h.jpg"
 						h=$((h-1))
+						j=$((j-1))
 						break
 		                        fi
 		                fi
