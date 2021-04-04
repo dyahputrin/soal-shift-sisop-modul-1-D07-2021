@@ -391,7 +391,7 @@ meimilki contoh output
 ![Screenshot (24)](https://user-images.githubusercontent.com/73246861/113509230-a7e2ab00-957e-11eb-8857-fe62ae3e5615.png) => ![Screenshot (26)](https://user-images.githubusercontent.com/73246861/113509284-f132fa80-957e-11eb-8bc6-aea874c1e45c.png)
 
 
-#### D : Mengamankan koleksi foto dengan ZIP
+### D : Mengamankan koleksi foto dengan ZIP
 Mengamankan dengan memindahkan file gambar yang telah didownload ke dalam zip dan zip tersebut diberi password tanggal didownloadnya file tersebut dengan format DDMMYYYY dan file zip diberi nama Koleksi.zip.
 ```
 #!/bin/bash
@@ -402,7 +402,7 @@ cotoh hasil output
 
 ![Screenshot (32)](https://user-images.githubusercontent.com/73246861/113509517-41f72300-9580-11eb-91b4-364831212933.png) => ![Screenshot (33)](https://user-images.githubusercontent.com/73246861/113509543-723ec180-9580-11eb-9a77-29647f99e7f8.png)
 
-#### E : Meng-unzip dan meng-zip dengan crontab
+### E : Meng-unzip dan meng-zip dengan crontab
 E.Membuat automasi dengan perintah zip untuk mengkompres file dan perintah unzip untuk mengkestrak file zip pada waktu yang telah ditentukan yaitu kompres file pada pukul 7 pagi setiap hari senin hingga hari jumat, dan mengekstrak file zip pada pukul 18 malam setiap hari senin hingga hari jumat
 
 ```
