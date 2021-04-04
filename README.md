@@ -68,8 +68,9 @@ Untuk memasukkan informasi tersebut ke dalam file user_statistic.csv yaitu mengg
 ### Kendala
 kendala yang saya kerjakan pada soal ini, yaitu saat mengerjakan soal nomor 1b yang mana menampilkan semua pesan error yang muncul beserta jumlah kemunculannya, kendalanya yaitu saat menampilkan pesan error, pesan error yang keluar hanya sebagian saja, ada beberapa kata yang terpotong ataupun username masuk, hal ini karena saya hanya menggunakan ```cut -d ' ' -f 7-9```, oleh karena itu untuk menampilkan pesan error, saya menggunakan cara manual. namun untuk mengecek apakah apabila dilakukan manual itu datanya benar saya menggunakan cara seperti berikut<br />
 ```cat syslog.log | grep "ERROR" | cut -d ' ' -f 7-9 | sort | uniq -c | sort -nr```<br />
-alasan menggunakan cara manual dari pada cara diatas, adalah apabila menggunakan cara diatas hanya akan memotong kolom 7-9 yang membuat salah adalah karena hanya bisa memotong hingga kolom ke 9, karena setiap pesan error terletak dari kolom 7 hingga 12 namun ada pesan error yang terletak pada kolom 10, sehingga apabila tetap memotong kolom 7-12 maka akan keluar usernamenya sedangkan kita hanya membutuhkan pesan error saja
-
+alasan menggunakan cara manual dari pada cara diatas, adalah apabila menggunakan cara diatas hanya akan memotong kolom 7-9 yang membuat salah adalah karena hanya bisa memotong hingga kolom ke 9, karena setiap pesan error terletak dari kolom 7 hingga 12 namun ada pesan error yang terletak pada kolom 10, sehingga apabila tetap memotong kolom 7-12 maka akan keluar usernamenya sedangkan kita hanya membutuhkan pesan error saja, berikut contoh apabila menggunakan cara yg terpotong <br />
+![1](https://github.com/migellamp/ss_soal1/blob/main/Screenshot%20from%202021-04-04%2013-56-22.png) <br />
+![2](https://github.com/migellamp/ss_soal1/blob/main/Screenshot%20from%202021-04-04%2013-57-38.png)
 
 
 ----------------------
@@ -391,7 +392,7 @@ meimilki contoh output
 ![Screenshot (24)](https://user-images.githubusercontent.com/73246861/113509230-a7e2ab00-957e-11eb-8857-fe62ae3e5615.png) => ![Screenshot (26)](https://user-images.githubusercontent.com/73246861/113509284-f132fa80-957e-11eb-8bc6-aea874c1e45c.png)
 
 
-### D : Mengamankan koleksi foto dengan ZIP
+#### D : Mengamankan koleksi foto dengan ZIP
 Mengamankan dengan memindahkan file gambar yang telah didownload ke dalam zip dan zip tersebut diberi password tanggal didownloadnya file tersebut dengan format DDMMYYYY dan file zip diberi nama Koleksi.zip.
 ```
 #!/bin/bash
@@ -402,15 +403,14 @@ cotoh hasil output
 
 ![Screenshot (32)](https://user-images.githubusercontent.com/73246861/113509517-41f72300-9580-11eb-91b4-364831212933.png) => ![Screenshot (33)](https://user-images.githubusercontent.com/73246861/113509543-723ec180-9580-11eb-9a77-29647f99e7f8.png)
 
-### E : Meng-unzip dan meng-zip dengan crontab
+#### E : Meng-unzip dan meng-zip dengan crontab
 E.Membuat automasi dengan perintah zip untuk mengkompres file dan perintah unzip untuk mengkestrak file zip pada waktu yang telah ditentukan yaitu kompres file pada pukul 7 pagi setiap hari senin hingga hari jumat, dan mengekstrak file zip pada pukul 18 malam setiap hari senin hingga hari jumat
 
-```
+``
 0 7 * * 1-5 zip -P `date +"\%m\%d\%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
 
 0 18 * * 1-5 unzip -P `date +"\%m\%d\%Y"` Koleksi.zip && rm Koleksi.zip
-```
-
+``
 ![1](https://user-images.githubusercontent.com/73246861/113509678-26d8e300-9581-11eb-83b9-4765f5622994.png)
 ![2](https://user-images.githubusercontent.com/73246861/113509682-2d675a80-9581-11eb-8942-c80e56b9d597.png)
 1 dan 2 untuk crontab atas 
