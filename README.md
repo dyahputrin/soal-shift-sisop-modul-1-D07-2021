@@ -207,3 +207,214 @@ Kendala selanjutnya ialah melakukan operasi aritmatika dengan angka desimal dima
 Kendala yang ketiga adalah pada soal 2c. Terdapat sedikit kesulitan saat ingin menampilkan nama para customer tanpa perlu perulangan. Namun, hal itu dapat diatasi dengan menambahkan ``` "uniq" ``` pada saat melakukan print.
 
 ----------------------
+
+
+### Soal 3
+
+### A : Membuat script untuk mendownload gambar dengan Ketentuanya
+Membuat script untuk mendownload gambar dan setiap gambar yang didownload tidak boleh sama, dan  peng-indexan gambar dilakukan dengan memberi  2 digit angka di belakang nama gambar, contoh ```Kucing_01```, dan membuat log file downloadnya
+
+yang diperlukan dalam pembuatan script tersebut adalah mendownload gambar dengan perintah wget dan mengecek kesamaan gambar dengan perintah cmp lalu peng-indexan gambar dilakukan hingga gamabr ke 23 , masalah yang ditemui adalah ketika memberi index pada gmabar yang didownload yang mana pengindexan gambar dari 0 – 9 tidaklah sama dengan pengindexan gambar 10 -23, 0-9 memilki 1 digit index sedangkan 10 – 23 memilki 2 digit angka.
+```
+#!/bin/bash
+h=1
+
+for((j=1;j<=24; j=j+1))
+do
+        if ((h<=9))
+        then
+		wget -O Koleksi_0$h.jpg -a foto.log https://loremflickr.com/320/240/kitten
+                for((i=1; i<q; i=i+1))
+                do
+			if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_0$h.jpg"; then
+                                rm "./Koleksi_0$h.jpg"
+				h=$((h-1))     
+				break
+                        fi
+                done
+        else
+		wget -O Koleksi_$h.jpg -a foto.log https://loremflickr.com/320/240/kitten
+                for((i=1; i<h; i=i+1))
+                do
+			if((i<10))
+                        then
+				if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_$h.jpg"; then
+				        rm "./Koleksi_$h.jpg"
+				        h=$((h-1))
+				        break
+                                fi
+                        else
+				if cmp -s "./Koleksi_$i.jpg" "./Koleksi_$h.jpg"; then
+				        rm "./Koleksi_$h.jpg"
+				        h=$((h-1))
+				        break
+                                fi
+                        fi
+                done
+        fi
+        h=$((h+1))
+done
+```
+
+yang memiliki contoh output 
+![Screenshot (18)](https://user-images.githubusercontent.com/73246861/113507798-d52b5b00-9576-11eb-8780-25a718f40028.png)
+Mengecek kesamaan gambar atau peritnah cmp  dilakukan dengan iterasi, iterasi mengecek apakah gambar yang sedang didownload sama dengan gambar yang telah ada dan iterasi tersebut dilakukan hingga iterasi ke _h_
+
+### B : Menjalankan script dengan crontab dan memasukan hasil output kedalam folder terpisah 
+Menjalankan script pada soal 3a dan membuat folder yang diberi nama tanggal di didownloadnya gambar serta hasil gambar yang telah didownload dimasukan ke dalam folder tersebut, dan script tersebut dilakukan secara otomatis yaitu setiap waktu yang di tentukan dengan automasi crontab 
+
+yang pertama dilakukan dalam pembuatan script tersebut adalah membuat variabel yang berisi tanggal dengan perintah ```date``` dan membuat folder dengan penamaan dengan variabel tersebut lalu dijalankan script dari soal nomor 3a dan dari output dari soal tersebut yaitu gambar dan log file dipindahkan kedalam folder yang telah dibuat diawal 
+
+```
+#!/bin/bash
+
+sekarang=$(date +"%d-%m-%Y")
+mkdir "$sekarang"
+
+bash ./soal3a.sh
+
+mv ./Koleksi_* "./$sekarang"
+mv ./foto.log "./$sekarang"
+```
+dan dari script tersebut memilki rujukan crontab sebagai berikut 
+```
+0 20 1/7,2/4 12 * /home/gian/sisop/modul1/soal3b.sh
+```
+arti dari crontab tersebut adalah script dari ```sisop3b.sh``` akan berjalan setiap sehari sekali tepatnya pada jam 8 malam dan pada tanggal kelipatan 7 yang diawali 1 (1,8,15,22,......) dan pada tanggal kelipatan 4 yang diawali 2 (2,6,10,14,......)
+
+yang contoh dari outputnya adalah : 
+![Screenshot (20)](https://user-images.githubusercontent.com/73246861/113508267-3e13d280-9579-11eb-8b84-0ec6a2cb634e.png) => ![Screenshot (22)](https://user-images.githubusercontent.com/73246861/113508353-c003fb80-9579-11eb-9877-30c7bbd092da.png)
+
+### C : Bergantian Mendownload Gambar dari url yang berbeda dan memasukannya ke dalam folder
+Mendownload gambar bergatian dan hasil dari download  gambar dibuat log file serta keduanya  dimasukan ke dalam folder gambar dan memberi tanggal pada folder, contoh “Kucing_02-04-2021”. script yang digunakan untuk mendownload gambar tersebut adalah script dari nomor 3a yang di duplikasi sedemikian sehingga dapat memenuhi kebutuhan soal dan pada awalan script diberi percabangan unutk mengecek apakah kemarin mendownload Kucing atau Kelinci apabila kemarin medownload kelinci maka hari ini akan mendownload kucing dan sebaliknya.
+
+```
+#!/bin/bash
+
+now=$(date -d yesterday +"%d-%m-%Y")
+ytd=$(date +"%d-%m-%Y")
+cek=$(ls Kucing_$ytd)
+ck=$?
+
+if (( ck == 0 ))
+then 	
+	
+	mkdir "Kelinci_$now"
+	h=1
+
+	for((j=1;j<=24; j=j+1))
+	do
+		if ((h<=9))
+		then
+			wget -O Koleksi_0$h.jpg -a foto.log https://loremflickr.com/320/240/bunny
+		        for((i=1; i<h; i=i+1))
+		        do
+				if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_0$h.jpg"; then
+		                        rm "./Koleksi_0$h.jpg"
+					h=$((h-1))     
+					break
+		                fi
+		        done
+		else
+			wget -O Koleksi_$h.jpg -a foto.log https://loremflickr.com/320/240/bunny
+		        for((i=1; i<h; i=i+1))
+		        do
+				if((i<10))
+		                then
+					if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_$h.jpg"; then
+						rm "./Koleksi_$h.jpg"
+						h=$((h-1))
+						break
+		                        fi
+		                else
+					if cmp -s "./Koleksi_$i.jpg" "./Koleksi_$h.jpg"; then
+						rm "./Koleksi_$h.jpg"
+						h=$((h-1))
+						break
+		                        fi
+		                fi
+		        done
+		fi
+		h=$((h+1))
+	done
+	mv ./Koleksi_* "./Kelinci_$now/"
+	mv ./foto.log "./Kelinci_$now/"
+else
+	mkdir "Kucing_$now"
+	h=1
+
+	for((j=1;j<=24; j=j+1))
+	do
+		if ((h<=9))
+		then
+			wget -O Koleksi_0$h.jpg -a foto.log https://loremflickr.com/320/240/kitten
+		        for((i=1; i<h; i=i+1))
+		        do
+				if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_0$h.jpg"; then
+		                        rm "./Koleksi_0$h.jpg"
+					h=$((h-1))     
+					break
+		                fi
+		        done
+		else
+			wget -O Koleksi_$h.jpg -a foto.log https://loremflickr.com/320/240/kitten
+		        for((i=1; i<h; i=i+1))
+		        do
+				if((i<10))
+		                then
+					if cmp -s "./Koleksi_0$i.jpg" "./Koleksi_$h.jpg"; then
+						rm "./Koleksi_$h.jpg"
+						h=$((h-1))
+						break
+		                        fi
+		                else
+					if cmp -s "./Koleksi_$i.jpg" "./Koleksi_$h.jpg"; then
+						rm "./Koleksi_$h.jpg"
+						h=$((h-1))
+						break
+		                        fi
+		                fi
+		        done
+		fi
+		h=$((h+1))
+	done
+	mv ./Koleksi_* "./Kucing_$now/"
+	mv ./foto.log "./Kucing_$now/"
+fi
+```
+
+code diatas adalah gabungan dari code soal3a dan soal3b 
+meimilki contoh output
+![Screenshot (24)](https://user-images.githubusercontent.com/73246861/113509230-a7e2ab00-957e-11eb-8857-fe62ae3e5615.png) => ![Screenshot (26)](https://user-images.githubusercontent.com/73246861/113509284-f132fa80-957e-11eb-8bc6-aea874c1e45c.png)
+
+
+#### D : Mengamankan koleksi foto dengan ZIP
+Mengamankan dengan memindahkan file gambar yang telah didownload ke dalam zip dan zip tersebut diberi password tanggal didownloadnya file tersebut dengan format DDMMYYYY dan file zip diberi nama Koleksi.zip.
+```
+#!/bin/bash
+
+zip -P `date +"%m%d%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
+```
+cotoh hasil output
+![Screenshot (32)](https://user-images.githubusercontent.com/73246861/113509517-41f72300-9580-11eb-91b4-364831212933.png) => ![Screenshot (33)](https://user-images.githubusercontent.com/73246861/113509543-723ec180-9580-11eb-9a77-29647f99e7f8.png)
+
+#### E : Meng-unzip dan meng-zip dengan crontab
+E.Membuat automasi dengan perintah zip untuk mengkompres file dan perintah unzip untuk mengkestrak file zip pada waktu yang telah ditentukan yaitu kompres file pada pukul 7 pagi setiap hari senin hingga hari jumat, dan mengekstrak file zip pada pukul 18 malam setiap hari senin hingga hari jumat
+
+``
+0 7 * * 1-5 zip -P `date +"\%m\%d\%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
+0 18 * * 1-5 unzip -P `date +"\%m\%d\%Y"` Koleksi.zip && rm Koleksi.zip
+``
+![1](https://user-images.githubusercontent.com/73246861/113509678-26d8e300-9581-11eb-83b9-4765f5622994.png)
+![2](https://user-images.githubusercontent.com/73246861/113509682-2d675a80-9581-11eb-8942-c80e56b9d597.png)
+1 dan 2 untuk crontab atas 
+![3](https://user-images.githubusercontent.com/73246861/113509707-51c33700-9581-11eb-8cca-14fabcd31335.png)
+![4](https://user-images.githubusercontent.com/73246861/113509712-5556be00-9581-11eb-95a2-7f4eba73cdae.png)
+3 dan 4 untuk crontab bawah
+
+
+
+
+
+
+
