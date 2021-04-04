@@ -12,6 +12,109 @@ cat syslog.log | cut -d ' ' -f 6-30 | sort
 ```
 ```cat syslog.log``` digunakan untuk membaca konten yang ada didalam file _syslog.log_. apabila menggunakan ```grep 'ERROR\|INFO'```maka akan mengeksekusi semua baris yang terdapat kata ERROR atau INFO, namun karena isi dari file syslog.log setiap baris memiliki kata ERROR atau INFO jadi bisa menggunakan cara ke-2 dengan menghapus ```grep 'ERROR\|INFO'```, lalu untuk ```cut -d ' ' -f 6-30``` yaitu memotong atau hanya mengambil pada kolom 6-30, karena diatas sudah dijelaskan juga letak informasi yang dibutuhkan terdapat pada kolom berapa saja, dan juga pada soal juga diberitahu pola isi dari file syslog.log yaitu cut
 ```<log_type> <log_message> (<username>)```
+<br />Output : <br />
+```
+ERROR Connection to DB failed (ac)
+ERROR Connection to DB failed (bpacheco)
+ERROR Connection to DB failed (breee)
+ERROR Connection to DB failed (breee)
+ERROR Connection to DB failed (jackowens)
+ERROR Connection to DB failed (jackowens)
+ERROR Connection to DB failed (kirknixon)
+ERROR Connection to DB failed (mai.hendrix)
+ERROR Connection to DB failed (mdouglas)
+ERROR Connection to DB failed (nonummy)
+ERROR Connection to DB failed (oren)
+ERROR Connection to DB failed (oren)
+ERROR Connection to DB failed (sri)
+ERROR Permission denied while closing ticket (ac)
+ERROR Permission denied while closing ticket (ahmed.miller)
+ERROR Permission denied while closing ticket (blossom)
+ERROR Permission denied while closing ticket (britanni)
+ERROR Permission denied while closing ticket (enim.non)
+ERROR Permission denied while closing ticket (flavia)
+ERROR Permission denied while closing ticket (mai.hendrix)
+ERROR Permission denied while closing ticket (montanap)
+ERROR Permission denied while closing ticket (montanap)
+ERROR Permission denied while closing ticket (rr.robinson)
+ERROR The ticket was modified while updating (blossom)
+ERROR The ticket was modified while updating (bpacheco)
+ERROR The ticket was modified while updating (breee)
+ERROR The ticket was modified while updating (breee)
+ERROR The ticket was modified while updating (enim.non)
+ERROR The ticket was modified while updating (flavia)
+ERROR The ticket was modified while updating (mcintosh)
+ERROR The ticket was modified while updating (mdouglas)
+ERROR The ticket was modified while updating (noel)
+ERROR Ticket doesn't exist (blossom)
+ERROR Ticket doesn't exist (blossom)
+ERROR Ticket doesn't exist (enim.non)
+ERROR Ticket doesn't exist (flavia)
+ERROR Ticket doesn't exist (flavia)
+ERROR Ticket doesn't exist (nonummy)
+ERROR Ticket doesn't exist (xlg)
+ERROR Timeout while retrieving information (ahmed.miller)
+ERROR Timeout while retrieving information (ahmed.miller)
+ERROR Timeout while retrieving information (blossom)
+ERROR Timeout while retrieving information (blossom)
+ERROR Timeout while retrieving information (flavia)
+ERROR Timeout while retrieving information (mai.hendrix)
+ERROR Timeout while retrieving information (mcintosh)
+ERROR Timeout while retrieving information (montanap)
+ERROR Timeout while retrieving information (montanap)
+ERROR Timeout while retrieving information (oren)
+ERROR Timeout while retrieving information (oren)
+ERROR Timeout while retrieving information (oren)
+ERROR Timeout while retrieving information (xlg)
+ERROR Timeout while retrieving information (xlg)
+ERROR Timeout while retrieving information (xlg)
+ERROR Tried to add information to closed ticket (ahmed.miller)
+ERROR Tried to add information to closed ticket (breee)
+ERROR Tried to add information to closed ticket (jackowens)
+ERROR Tried to add information to closed ticket (jackowens)
+ERROR Tried to add information to closed ticket (mcintosh)
+ERROR Tried to add information to closed ticket (mdouglas)
+ERROR Tried to add information to closed ticket (noel)
+ERROR Tried to add information to closed ticket (noel)
+ERROR Tried to add information to closed ticket (nonummy)
+ERROR Tried to add information to closed ticket (oren)
+ERROR Tried to add information to closed ticket (oren)
+ERROR Tried to add information to closed ticket (sri)
+INFO Closed ticket [#1712] (britanni)
+INFO Closed ticket [#1754] (noel)
+INFO Closed ticket [#2452] (jackowens)
+INFO Closed ticket [#3297] (kirknixon)
+INFO Closed ticket [#4372] (oren)
+INFO Closed ticket [#7333] (enim.non)
+INFO Closed ticket [#7948] (noel)
+INFO Closed ticket [#8604] (mcintosh)
+INFO Closed ticket [#8685] (rr.robinson)
+INFO Closed ticket [#9876] (blossom)
+INFO Commented on ticket [#1097] (breee)
+INFO Commented on ticket [#1653] (noel)
+INFO Commented on ticket [#2253] (nonummy)
+INFO Commented on ticket [#2389] (sri)
+INFO Commented on ticket [#3813] (mcintosh)
+INFO Commented on ticket [#4225] (noel)
+INFO Commented on ticket [#4562] (ac)
+INFO Commented on ticket [#4709] (blossom)
+INFO Commented on ticket [#6518] (rr.robinson)
+INFO Commented on ticket [#7159] (ahmed.miller)
+INFO Commented on ticket [#7255] (oren)
+INFO Commented on ticket [#8385] (mdouglas)
+INFO Commented on ticket [#8628] (noel)
+INFO Created ticket [#2461] (jackowens)
+INFO Created ticket [#2860] (mcintosh)
+INFO Created ticket [#4217] (mdouglas)
+INFO Created ticket [#5455] (ac)
+INFO Created ticket [#5784] (sri)
+INFO Created ticket [#5896] (mcintosh)
+INFO Created ticket [#6361] (enim.non)
+INFO Created ticket [#7115] (noel)
+INFO Created ticket [#7298] (ahmed.miller)
+INFO Created ticket [#7737] (nonummy)
+INFO Created ticket [#7897] (kirknixon)
+```
 
 ### B. Menampilkan semua pesan error yang muncul beserta jumlah kemunculannya
 Untuk menampilkan pesan error, saya menggunakan cara manual. namun untuk mengecek apakah apabila dilakukan manual itu datanya benar saya menggunakan cara seperti berikut<br />
@@ -49,6 +152,9 @@ printf "ERROR,COUNT\n" >> error_message.csv
 printf "%s,%d\n%s,%d\n%s,%d\n%s,%d\n%s,%d\n%s,%d\n" "$timeouttxt" "$timeout" "$koneksitxt" "$koneksi" "$triedtxt" "$tried" "$permissiontxt" "$permission" "$modiftxt" "$modif" "$existtxt" "$exist" >>  error_message.csv
 ```
 untuk memasukkan informasi-informasi tersebut ke dalam _error_message.csv_ cukup menggunakan cara berikut ```>> error_message.csv```
+<br />Output :<br />
+![alt text](https://github.com/migellamp/ss_soal1/blob/main/Screenshot%20from%202021-04-04%2020-25-24.png) <br />
+
 
 ### E. Semua informasi yang didapatkan pada poin c dituliskan ke dalam file user_statistic.csv
 ```
@@ -64,12 +170,16 @@ done  >> user_statistic.csv;
 Pertama yang dilakukan adalah memasukkan header ke dalam file user_statistic.csv ```printf "USERNAME,INFO,ERROR\n" >> user_statistic.csv``` selanjutnya, untuk bisa mendapatkan kemunculuan jumlah error dan info, yaitu melakukan perulangan while yang mana ```echo "$user"``` dijadikan sebagai input dalam perulangan ini. lalu untuk menghitung jumlah error dan jumlah infonya kita melakukan operasi didalam while yaitu menggunaan ```grep``` yang mencari kata INFO/ERROR pada setiap baris berdasarkan username ```$(grep -E "INFO.*($username))" syslog.log | wc -l)``` dan data usernya dipindahkan atau disalin ke variable username. Dan untuk mendapatkan jumlahnya menggunakan ```wc -l``` atau fungsi count untuk menghitung jumlahnya. dan masing2 operasi tersebut dimasukkan ke dalam variable dan tinggal memanggilnya dengan ```echo```<br/>
 
 Untuk memasukkan informasi tersebut ke dalam file user_statistic.csv yaitu menggunakan ```>> user_statistic.csv``` diakhir perulangan whilenya.
+<br />Output :<br />
+![alt text](https://github.com/migellamp/ss_soal1/blob/main/Screenshot%20from%202021-04-04%2020-25-44.png) <br />
 
 ### Kendala
 kendala yang saya kerjakan pada soal ini, yaitu saat mengerjakan soal nomor 1b yang mana menampilkan semua pesan error yang muncul beserta jumlah kemunculannya, kendalanya yaitu saat menampilkan pesan error, pesan error yang keluar hanya sebagian saja, ada beberapa kata yang terpotong ataupun username masuk, hal ini karena saya hanya menggunakan ```cut -d ' ' -f 7-9```, oleh karena itu untuk menampilkan pesan error, saya menggunakan cara manual. namun untuk mengecek apakah apabila dilakukan manual itu datanya benar saya menggunakan cara seperti berikut<br />
 ```cat syslog.log | grep "ERROR" | cut -d ' ' -f 7-9 | sort | uniq -c | sort -nr```<br />
 alasan menggunakan cara manual dari pada cara diatas, adalah apabila menggunakan cara diatas hanya akan memotong kolom 7-9 yang membuat salah adalah karena hanya bisa memotong hingga kolom ke 9, karena setiap pesan error terletak dari kolom 7 hingga 12 namun ada pesan error yang terletak pada kolom 10, sehingga apabila tetap memotong kolom 7-12 maka akan keluar usernamenya sedangkan kita hanya membutuhkan pesan error saja
-
+<br />Output :<br />
+![alt text](https://github.com/migellamp/ss_soal1/blob/main/Screenshot%20from%202021-04-04%2013-57-38.png) <br />
+![alt text](https://github.com/migellamp/ss_soal1/blob/main/Screenshot%20from%202021-04-04%2013-56-22.png) <br />
 
 
 ----------------------
