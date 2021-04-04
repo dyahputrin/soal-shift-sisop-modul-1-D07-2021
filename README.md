@@ -257,6 +257,7 @@ done
 ```
 
 yang memiliki contoh output 
+
 ![Screenshot (18)](https://user-images.githubusercontent.com/73246861/113507798-d52b5b00-9576-11eb-8780-25a718f40028.png)
 Mengecek kesamaan gambar atau peritnah cmp  dilakukan dengan iterasi, iterasi mengecek apakah gambar yang sedang didownload sama dengan gambar yang telah ada dan iterasi tersebut dilakukan hingga iterasi ke _h_
 
@@ -282,7 +283,8 @@ dan dari script tersebut memilki rujukan crontab sebagai berikut
 ```
 arti dari crontab tersebut adalah script dari ```sisop3b.sh``` akan berjalan setiap sehari sekali tepatnya pada jam 8 malam dan pada tanggal kelipatan 7 yang diawali 1 (1,8,15,22,......) dan pada tanggal kelipatan 4 yang diawali 2 (2,6,10,14,......)
 
-yang contoh dari outputnya adalah : 
+yang contoh dari outputnya adalah :
+
 ![Screenshot (20)](https://user-images.githubusercontent.com/73246861/113508267-3e13d280-9579-11eb-8b84-0ec6a2cb634e.png) => ![Screenshot (22)](https://user-images.githubusercontent.com/73246861/113508353-c003fb80-9579-11eb-9877-30c7bbd092da.png)
 
 ### C : Bergantian Mendownload Gambar dari url yang berbeda dan memasukannya ke dalam folder
@@ -385,6 +387,7 @@ fi
 
 code diatas adalah gabungan dari code soal3a dan soal3b 
 meimilki contoh output
+
 ![Screenshot (24)](https://user-images.githubusercontent.com/73246861/113509230-a7e2ab00-957e-11eb-8857-fe62ae3e5615.png) => ![Screenshot (26)](https://user-images.githubusercontent.com/73246861/113509284-f132fa80-957e-11eb-8bc6-aea874c1e45c.png)
 
 
@@ -396,6 +399,7 @@ Mengamankan dengan memindahkan file gambar yang telah didownload ke dalam zip da
 zip -P `date +"%m%d%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
 ```
 cotoh hasil output
+
 ![Screenshot (32)](https://user-images.githubusercontent.com/73246861/113509517-41f72300-9580-11eb-91b4-364831212933.png) => ![Screenshot (33)](https://user-images.githubusercontent.com/73246861/113509543-723ec180-9580-11eb-9a77-29647f99e7f8.png)
 
 #### E : Meng-unzip dan meng-zip dengan crontab
@@ -403,11 +407,13 @@ E.Membuat automasi dengan perintah zip untuk mengkompres file dan perintah unzip
 
 ``
 0 7 * * 1-5 zip -P `date +"\%m\%d\%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
+
 0 18 * * 1-5 unzip -P `date +"\%m\%d\%Y"` Koleksi.zip && rm Koleksi.zip
 ``
 ![1](https://user-images.githubusercontent.com/73246861/113509678-26d8e300-9581-11eb-83b9-4765f5622994.png)
 ![2](https://user-images.githubusercontent.com/73246861/113509682-2d675a80-9581-11eb-8942-c80e56b9d597.png)
 1 dan 2 untuk crontab atas 
+
 ![3](https://user-images.githubusercontent.com/73246861/113509707-51c33700-9581-11eb-8cca-14fabcd31335.png)
 ![4](https://user-images.githubusercontent.com/73246861/113509712-5556be00-9581-11eb-95a2-7f4eba73cdae.png)
 3 dan 4 untuk crontab bawah
