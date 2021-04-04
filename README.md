@@ -405,11 +405,12 @@ cotoh hasil output
 #### E : Meng-unzip dan meng-zip dengan crontab
 E.Membuat automasi dengan perintah zip untuk mengkompres file dan perintah unzip untuk mengkestrak file zip pada waktu yang telah ditentukan yaitu kompres file pada pukul 7 pagi setiap hari senin hingga hari jumat, dan mengekstrak file zip pada pukul 18 malam setiap hari senin hingga hari jumat
 
-``
+```
 0 7 * * 1-5 zip -P `date +"\%m\%d\%Y"` -r -m Koleksi.zip ./Kucing* ./Kelinci*
 
 0 18 * * 1-5 unzip -P `date +"\%m\%d\%Y"` Koleksi.zip && rm Koleksi.zip
-``
+```
+
 ![1](https://user-images.githubusercontent.com/73246861/113509678-26d8e300-9581-11eb-83b9-4765f5622994.png)
 ![2](https://user-images.githubusercontent.com/73246861/113509682-2d675a80-9581-11eb-8942-c80e56b9d597.png)
 1 dan 2 untuk crontab atas 
