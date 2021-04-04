@@ -65,6 +65,13 @@ Pertama yang dilakukan adalah memasukkan header ke dalam file user_statistic.csv
 
 Untuk memasukkan informasi tersebut ke dalam file user_statistic.csv yaitu menggunakan ```>> user_statistic.csv``` diakhir perulangan whilenya.
 
+### Kendala
+kendala yang saya kerjakan pada soal ini, yaitu saat mengerjakan soal nomor 1b yang mana menampilkan semua pesan error yang muncul beserta jumlah kemunculannya, kendalanya yaitu saat menampilkan pesan error, pesan error yang keluar hanya sebagian saja, ada beberapa kata yang terpotong ataupun username masuk, hal ini karena saya hanya menggunakan ```cut -d ' ' -f 7-9```, oleh karena itu untuk menampilkan pesan error, saya menggunakan cara manual. namun untuk mengecek apakah apabila dilakukan manual itu datanya benar saya menggunakan cara seperti berikut<br />
+```cat syslog.log | grep "ERROR" | cut -d ' ' -f 7-9 | sort | uniq -c | sort -nr```<br />
+alasan menggunakan cara manual dari pada cara diatas, adalah apabila menggunakan cara diatas hanya akan memotong kolom 7-9 yang membuat salah adalah karena hanya bisa memotong hingga kolom ke 9, karena setiap pesan error terletak dari kolom 7 hingga 12 namun ada pesan error yang terletak pada kolom 10, sehingga apabila tetap memotong kolom 7-12 maka akan keluar usernamenya sedangkan kita hanya membutuhkan pesan error saja
+
+
+
 ----------------------
 
 ### Soal 2
